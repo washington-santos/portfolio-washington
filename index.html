@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Washington dos Santos Oliveira — Banco de Dados</title>
+<meta name="description" content="Portfólio de Washington dos Santos Oliveira, estudante de Banco de Dados e ex-gestor de tráfego, com projetos em SQL, Python e integração de dados.">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* =========================================================
+     COMO EDITAR ESTE ARQUIVO
+     - Textos: procure o texto que quer mudar direto no HTML abaixo.
+     - Novo projeto: copie um bloco <article class="proj-card"> ... </article>
+       inteiro (dentro de #projetos) e cole antes do card tracejado
+       "Novo projeto em breve". Troque título, descrição, tags e links.
+     - Cores: mude só as variáveis aqui em cima, em :root.
+     ========================================================= */
+
+  :root{
+    --bg: #F5F6F3;
+    --surface: #FFFFFF;
+    --ink: #14181C;
+    --ink-soft: #4B5560;
+    --ink-faint: #7B8590;
+    --line: #DFE3DD;
+    --line-soft: #EAEDE7;
+    --accent: #24409E;
+    --accent-ink: #0F1F52;
+    --accent-soft: #E7ECF9;
+    --teal: #0E7D77;
+    --teal-soft: #E2F3F1;
+    --amber: #B5760F;
+    --amber-soft: #FBF0DD;
+
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'IBM Plex Sans', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  img,svg{ max-width:100%; display:block; }
+  a{ color: inherit; }
+  .wrap{ max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+
+  @media(prefers-reduced-motion: reduce){
+    *{ animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  }
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position: sticky; top:0; z-index: 40;
+    background: rgba(245,246,243,0.88);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner{ display:flex; align-items:center; justify-content:space-between; padding: 18px 32px; max-width:1080px; margin:0 auto; }
+  .nav-mark{ font-family: var(--font-mono); font-size:14px; font-weight:500; letter-spacing: 0.02em; }
+  .nav-mark span{ color: var(--accent); }
+  .nav-links{ display:flex; gap: 28px; list-style:none; margin:0; padding:0; }
+  .nav-links a{ font-size:14px; text-decoration:none; color: var(--ink-soft); transition: color .15s ease; }
+  .nav-links a:hover{ color: var(--accent); }
+  .nav-cta{ font-family: var(--font-mono); font-size:13px; text-decoration:none; border:1px solid var(--ink); color:var(--ink); padding:8px 16px; border-radius: 4px; transition: background .15s ease, color .15s ease; white-space:nowrap; }
+  .nav-cta:hover{ background: var(--ink); color: var(--bg); }
+  .nav-toggle{ display:none; }
+
+  /* ---------- HERO ---------- */
+  .hero{ padding: 88px 0 96px; position:relative; overflow:hidden; }
+  .hero-grid{ display:grid; grid-template-columns: 1.15fr 0.85fr; gap: 56px; align-items:center; }
+  .eyebrow{
+    font-family: var(--font-mono); font-size: 13px; color: var(--accent);
+    display:flex; align-items:center; gap:8px; margin-bottom: 20px;
+  }
+  .eyebrow::before{ content:''; width:8px; height:8px; border-radius:50%; background: var(--teal); animation: blink 2.2s ease-in-out infinite; }
+  @keyframes blink{ 0%,100%{ opacity:1; } 50%{ opacity:.35; } }
+
+  h1.name{
+    font-family: var(--font-display); font-weight:600;
+    font-size: clamp(34px, 5vw, 54px); line-height: 1.06; margin: 0 0 14px;
+    letter-spacing: -0.01em;
+  }
+  .role{ font-family: var(--font-display); font-size: 20px; color: var(--ink-soft); font-weight:500; margin: 0 0 22px; }
+  .pitch{ font-size: 16.5px; color: var(--ink-soft); max-width: 480px; margin: 0 0 34px; }
+  .hero-ctas{ display:flex; gap:14px; flex-wrap:wrap; }
+  .btn{
+    font-family: var(--font-body); font-size:14.5px; font-weight:500; text-decoration:none;
+    padding: 12px 22px; border-radius: 4px; display:inline-flex; align-items:center; gap:8px;
+    transition: transform .12s ease, background .15s ease, border-color .15s ease;
+  }
+  .btn:active{ transform: scale(0.98); }
+  .btn-primary{ background: var(--accent); color:#fff; border:1px solid var(--accent); }
+  .btn-primary:hover{ background: var(--accent-ink); border-color: var(--accent-ink); }
+  .btn-ghost{ background:transparent; color: var(--ink); border:1px solid var(--line); }
+  .btn-ghost:hover{ border-color: var(--ink); }
+
+  /* query card */
+  .query-card{
+    background: var(--ink); color:#EDEFEE; border-radius: 10px; padding: 22px 22px 18px;
+    font-family: var(--font-mono); font-size: 12.6px; line-height:1.7;
+    box-shadow: 0 24px 48px -24px rgba(20,24,28,0.35);
+  }
+  .query-dots{ display:flex; gap:6px; margin-bottom:14px; }
+  .query-dots span{ width:9px; height:9px; border-radius:50%; background:#3C444C; }
+  .query-title{ color:#8B95A0; margin-bottom: 10px; }
+  .query-kw{ color:#7FA7E8; }
+  .query-str{ color:#8FCB9B; }
+  .query-fn{ color:#E8B96A; }
+  .query-out{ margin-top:14px; padding-top:12px; border-top:1px dashed #3C444C; color:#B7BFC7; }
+  .query-out .hi{ color:#8FCB9B; }
+
+  /* schema diagram */
+  .schema{ margin-top: 40px; }
+  .schema-row{ display:flex; align-items:center; gap:0; }
+  .schema-node{
+    font-family: var(--font-mono); font-size: 11.5px; text-align:center; color: var(--ink-soft);
+    background: var(--surface); border:1px solid var(--line); border-radius: 6px;
+    padding: 9px 10px; flex: 1; min-width:0;
+  }
+  .schema-arrow{ width: 22px; height:1px; background: var(--line); position:relative; flex-shrink:0; }
+  .schema-arrow::after{
+    content:''; position:absolute; right:-1px; top:-2px; width:5px; height:5px;
+    border-right:1px solid var(--ink-faint); border-bottom:1px solid var(--ink-faint); transform: rotate(-45deg);
+  }
+  .schema-arrow .pulse{
+    position:absolute; top:-2.5px; left:0; width:5px; height:5px; border-radius:50%; background: var(--teal);
+    animation: travel 3.2s linear infinite;
+  }
+  .schema-row .schema-arrow:nth-child(4) .pulse{ animation-delay: .8s; }
+  .schema-row .schema-arrow:nth-child(6) .pulse{ animation-delay: 1.6s; }
+  @keyframes travel{ 0%{ left:0; opacity:0; } 10%{ opacity:1; } 90%{ opacity:1; } 100%{ left:100%; opacity:0; } }
+
+  @media(max-width: 860px){
+    .hero-grid{ grid-template-columns: 1fr; }
+    .schema-row{ flex-wrap:wrap; }
+    .schema-arrow{ display:none; }
+    .schema-node{ flex: 1 1 45%; }
+  }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{ padding: 84px 0; border-top: 1px solid var(--line-soft); }
+  .sec-head{ margin-bottom: 44px; }
+  .sec-eyebrow{ font-family: var(--font-mono); font-size:13px; color: var(--ink-faint); margin-bottom:10px; }
+  h2.sec-title{ font-family: var(--font-display); font-size: clamp(24px,3vw,32px); font-weight:600; margin:0; letter-spacing:-0.01em; }
+
+  /* ---------- SOBRE ---------- */
+  .about-body{ display:grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+  .about-body p{ color: var(--ink-soft); font-size:16px; margin: 0 0 18px; }
+  .about-body p:last-child{ margin-bottom:0; }
+  @media(max-width:760px){ .about-body{ grid-template-columns:1fr; } }
+
+  /* ---------- HABILIDADES ---------- */
+  .skills-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .skill-group{ background: var(--surface); border:1px solid var(--line); border-radius: 10px; padding: 22px; }
+  .skill-group h3{ font-family: var(--font-mono); font-size:12.5px; text-transform:uppercase; letter-spacing:0.04em; color: var(--accent); margin:0 0 14px; font-weight:500; }
+  .skill-tags{ display:flex; flex-wrap:wrap; gap:8px; }
+  .tag{ font-size:13px; color: var(--ink-soft); border:1px solid var(--line); border-radius:4px; padding:5px 10px; background: var(--bg); }
+  @media(max-width:860px){ .skills-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- PROJETOS ---------- */
+  .proj-list{ display:flex; flex-direction:column; gap:20px; }
+  .proj-card{
+    background: var(--surface); border:1px solid var(--line); border-radius: 12px;
+    padding: 30px 32px; display:grid; grid-template-columns: 1fr auto; gap: 24px; align-items:start;
+  }
+  .proj-head{ display:flex; align-items:center; gap:12px; margin-bottom:10px; flex-wrap:wrap; }
+  .proj-title{ font-family: var(--font-display); font-size:19px; font-weight:600; margin:0; }
+  .badge{ font-family: var(--font-mono); font-size:11.5px; padding:4px 9px; border-radius:4px; white-space:nowrap; }
+  .badge-amber{ background: var(--amber-soft); color: var(--amber); }
+  .badge-teal{ background: var(--teal-soft); color: var(--teal); }
+  .proj-desc{ color: var(--ink-soft); font-size:14.8px; max-width: 620px; margin:0 0 16px; }
+  .proj-tags{ display:flex; flex-wrap:wrap; gap:8px; }
+  .proj-actions{ display:flex; flex-direction:column; gap:10px; align-items:flex-end; }
+  .proj-link{ font-family: var(--font-mono); font-size:13px; text-decoration:none; color: var(--accent); white-space:nowrap; display:flex; align-items:center; gap:6px; }
+  .proj-link:hover{ text-decoration:underline; }
+  .proj-link.muted{ color: var(--ink-faint); cursor:default; }
+  .proj-link.muted:hover{ text-decoration:none; }
+  @media(max-width:700px){
+    .proj-card{ grid-template-columns: 1fr; }
+    .proj-actions{ align-items:flex-start; flex-direction:row; flex-wrap:wrap; }
+  }
+
+  .proj-card.placeholder{
+    border-style: dashed; align-items:center; justify-items:center; text-align:center;
+    grid-template-columns: 1fr; padding: 34px; color: var(--ink-faint);
+  }
+  .proj-card.placeholder .plus{ font-family: var(--font-display); font-size:26px; color: var(--line); margin-bottom:6px; }
+  .proj-card.placeholder p{ font-size:13.5px; margin:0; }
+
+  /* ---------- FORMAÇÃO ---------- */
+  .timeline{ display:flex; flex-direction:column; }
+  .tl-item{ display:grid; grid-template-columns: 120px 1fr; gap: 24px; padding: 22px 0; border-top:1px solid var(--line-soft); }
+  .tl-item:first-child{ border-top:none; }
+  .tl-year{ font-family: var(--font-mono); font-size:13.5px; color: var(--accent); }
+  .tl-course{ font-family: var(--font-display); font-size:17px; font-weight:600; margin:0 0 4px; }
+  .tl-school{ color: var(--ink-soft); font-size:14.5px; margin:0; }
+  @media(max-width:600px){ .tl-item{ grid-template-columns:1fr; gap:6px; } }
+
+  /* ---------- CONTATO ---------- */
+  .contact{ background: var(--ink); color:#EDEFEE; border-radius: 16px; padding: 56px 48px; text-align:center; }
+  .contact .sec-eyebrow{ color:#8B95A0; }
+  .contact h2{ font-family: var(--font-display); font-size: clamp(24px,3.4vw,34px); font-weight:600; margin: 8px 0 14px; }
+  .contact p{ color:#B7BFC7; max-width:480px; margin: 0 auto 32px; font-size:15.5px; }
+  .contact-actions{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+  .contact .btn-primary{ background:#EDEFEE; color: var(--ink); border-color:#EDEFEE; }
+  .contact .btn-primary:hover{ background:#fff; }
+  .contact .btn-ghost{ border-color:#3C444C; color:#EDEFEE; }
+  .contact .btn-ghost:hover{ border-color:#EDEFEE; }
+  @media(max-width:600px){ .contact{ padding: 44px 24px; } }
+
+  /* ---------- FOOTER ---------- */
+  footer{ padding: 32px 0 48px; }
+  .footer-row{ display:flex; justify-content:space-between; align-items:center; font-size:13px; color: var(--ink-faint); flex-wrap:wrap; gap:10px; }
+  .footer-row a{ text-decoration:none; color: var(--ink-faint); }
+  .footer-row a:hover{ color: var(--accent); }
+
+  /* focus visibility */
+  a:focus-visible, button:focus-visible{ outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  @media(max-width:760px){
+    .nav-links{ display:none; }
+    .wrap{ padding: 0 20px; }
+    .hero{ padding: 56px 0 64px; }
+    section{ padding: 56px 0; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="nav-mark">washington<span>.</span>db</div>
+    <ul class="nav-links">
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#projetos">Projetos</a></li>
+      <li><a href="#habilidades">Habilidades</a></li>
+      <li><a href="#formacao">Formação</a></li>
+    </ul>
+    <a class="nav-cta" href="mailto:washingtonsantos1998@live.com">Contato</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero wrap" style="border-top:none;">
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow">disponível para estágio em banco de dados</p>
+        <h1 class="name">Washington dos Santos Oliveira</h1>
+        <p class="role">Estudante de Banco de Dados</p>
+        <p class="pitch">
+          Vim do tráfego pago para os dados: anos analisando funil de vendas me levaram a
+          implementar rastreamento server-side e a construir meus próprios sistemas.
+          Hoje estudo Banco de Dados para transformar essa prática em base técnica sólida.
+        </p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#projetos">Ver projetos</a>
+          <a class="btn btn-ghost" href="#contato">Falar comigo</a>
+        </div>
+
+        <div class="schema">
+          <div class="schema-row">
+            <div class="schema-node">Tráfego pago</div>
+            <div class="schema-arrow"><span class="pulse"></span></div>
+            <div class="schema-node">Meta CAPI / GA4</div>
+            <div class="schema-arrow"><span class="pulse"></span></div>
+            <div class="schema-node">CRM Next</div>
+            <div class="schema-arrow"><span class="pulse"></span></div>
+            <div class="schema-node">Banco de dados</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="query-card">
+        <div class="query-dots"><span></span><span></span><span></span></div>
+        <div class="query-title">-- portfolio.sql</div>
+        <div><span class="query-kw">SELECT</span> nome, foco</div>
+        <div><span class="query-kw">FROM</span> candidatos</div>
+        <div><span class="query-kw">WHERE</span> experiencia_pratica = <span class="query-str">true</span></div>
+        <div>&nbsp;&nbsp;<span class="query-kw">AND</span> stack <span class="query-fn">@></span> <span class="query-str">('SQL','Python')</span></div>
+        <div><span class="query-kw">ORDER BY</span> dedicacao <span class="query-kw">DESC</span> <span class="query-kw">LIMIT</span> 1;</div>
+        <div class="query-out">
+          <span class="hi">Washington dos Santos Oliveira</span> — Banco de Dados
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sobre" class="wrap">
+    <div class="sec-head">
+      <p class="sec-eyebrow">-- sobre</p>
+      <h2 class="sec-title">De métricas de funil a estrutura de dados</h2>
+    </div>
+    <div class="about-body">
+      <p>
+        Sou estudante de Banco de Dados e atuo há anos como gestor de tráfego — área em que
+        aprendi a analisar métricas de funil para identificar gargalos em vendas e abandono de
+        carrinho. Foi nesse contexto que tive meu primeiro contato real com dados.
+      </p>
+      <p>
+        Implementei rastreamento server-side (Meta CAPI) e integrações com GA4 para corrigir
+        perdas de mensuração causadas pelas restrições de privacidade do iOS. Esse desafio
+        despertou meu interesse pela área, e hoje já desenvolvo projetos próprios, como um CRM
+        completo de gestão de vendas. Busco uma vaga de estágio para aprofundar meu conhecimento
+        técnico e crescer profissionalmente em banco de dados.
+      </p>
+    </div>
+  </section>
+
+  <section id="habilidades" class="wrap">
+    <div class="sec-head">
+      <p class="sec-eyebrow">-- habilidades</p>
+      <h2 class="sec-title">O que eu uso no dia a dia</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h3>Banco de dados & programação</h3>
+        <div class="skill-tags">
+          <span class="tag">SQL</span>
+          <span class="tag">Python</span>
+          <span class="tag">PL/pgSQL</span>
+          <span class="tag">Modelagem de dados</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Dados de marketing & integrações</h3>
+        <div class="skill-tags">
+          <span class="tag">Meta Conversions API</span>
+          <span class="tag">Google Analytics 4</span>
+          <span class="tag">Integração entre plataformas</span>
+          <span class="tag">Análise de funil</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Forma de trabalhar</h3>
+        <div class="skill-tags">
+          <span class="tag">Leitura de dados p/ decisão</span>
+          <span class="tag">IA generativa como acelerador</span>
+          <span class="tag">Aprendizado autodidata</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projetos" class="wrap">
+    <div class="sec-head">
+      <p class="sec-eyebrow">-- projetos</p>
+      <h2 class="sec-title">Sistemas que construí resolvendo problemas reais</h2>
+    </div>
+
+    <div class="proj-list">
+
+      <article class="proj-card">
+        <div>
+          <div class="proj-head">
+            <h3 class="proj-title">CRM Next</h3>
+            <span class="badge badge-amber">Repositório privado — dados de clientes</span>
+          </div>
+          <p class="proj-desc">
+            CRM desenvolvido para resolver um problema real de gestão de tráfego: alto volume de
+            carrinhos abandonados e Pix não pagos. Automatiza a recuperação de vendas com disparos
+            em intervalos (1h, 4h e 24h) e consolida indicadores como LTV, frequência de compra,
+            produtos mais vendidos e vendas por cidade e estado.
+          </p>
+          <div class="proj-tags">
+            <span class="tag">Python</span>
+            <span class="tag">SQL</span>
+            <span class="tag">Integração com APIs de pagamento</span>
+          </div>
+        </div>
+        <div class="proj-actions">
+          <span class="proj-link muted">Prints e vídeo em breve</span>
+          <a class="proj-link" href="https://github.com/washington-santos" target="_blank" rel="noopener">Perfil GitHub →</a>
+        </div>
+      </article>
+
+      <article class="proj-card">
+        <div>
+          <div class="proj-head">
+            <h3 class="proj-title">Rastreamento de conversões — Meta CAPI + GA4</h3>
+            <span class="badge badge-amber">Prints em breve</span>
+          </div>
+          <p class="proj-desc">
+            Implementação de rastreamento server-side para corrigir perdas de mensuração causadas
+            pelas restrições de privacidade do iOS. Conecta Meta Conversions API, GA4 e Pixel para
+            garantir precisão nas conversões em campanhas de tráfego pago.
+          </p>
+          <div class="proj-tags">
+            <span class="tag">Meta Conversions API</span>
+            <span class="tag">GA4</span>
+            <span class="tag">Integração via nuvem</span>
+          </div>
+        </div>
+        <div class="proj-actions">
+          <span class="proj-link muted">Prints em breve</span>
+        </div>
+      </article>
+
+      <article class="proj-card">
+        <div>
+          <div class="proj-head">
+            <h3 class="proj-title">Fluente</h3>
+            <span class="badge badge-teal">Repositório privado</span>
+          </div>
+          <p class="proj-desc">
+            Plataforma de estudo de inglês criada para uso pessoal, com foco em aperfeiçoar meu
+            próprio aprendizado do idioma através da prática guiada.
+          </p>
+          <div class="proj-tags">
+            <span class="tag">TypeScript</span>
+            <span class="tag">PL/pgSQL</span>
+          </div>
+        </div>
+        <div class="proj-actions">
+          <a class="proj-link" href="https://github.com/washington-santos" target="_blank" rel="noopener">Perfil GitHub →</a>
+        </div>
+      </article>
+
+      <!-- Para adicionar um novo projeto, copie um <article class="proj-card"> acima
+           e cole aqui embaixo, antes do card tracejado. -->
+
+      <article class="proj-card placeholder">
+        <div class="plus">+</div>
+        <p>Este espaço está reservado para o próximo projeto.</p>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="formacao" class="wrap">
+    <div class="sec-head">
+      <p class="sec-eyebrow">-- formação</p>
+      <h2 class="sec-title">Trajetória acadêmica</h2>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <span class="tl-year">2026 — atual</span>
+        <div>
+          <p class="tl-course">Banco de Dados</p>
+          <p class="tl-school">Estácio</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-year">2019</span>
+        <div>
+          <p class="tl-course">Técnico em Administração</p>
+          <p class="tl-school">Polígono</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato" class="wrap">
+    <div class="contact">
+      <p class="sec-eyebrow">-- contato</p>
+      <h2>Aberto a oportunidades de estágio em banco de dados</h2>
+      <p>Se meu percurso de tráfego pago para dados fizer sentido para sua equipe, vamos conversar.</p>
+      <div class="contact-actions">
+        <a class="btn btn-primary" href="mailto:washingtonsantos1998@live.com">Enviar e-mail</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/washington-santos-47190b423/" target="_blank" rel="noopener">LinkedIn →</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <div class="footer-row">
+    <span>Washington dos Santos Oliveira © 2026</span>
+    <a href="mailto:washingtonsantos1998@live.com">washingtonsantos1998@live.com</a>
+  </div>
+</footer>
+
+</body>
+</html>
