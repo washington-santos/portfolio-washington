@@ -198,6 +198,36 @@
   .proj-card.placeholder .plus{ font-family: var(--font-display); font-size:26px; color: var(--line); margin-bottom:6px; }
   .proj-card.placeholder p{ font-size:13.5px; margin:0; }
 
+  /* ---------- GALERIA DE PRINTS ---------- */
+  .proj-gallery-data{ display:none; }
+  .gallery-btn{
+    font-family: var(--font-mono); font-size:13px; background:transparent; border:none; padding:0;
+    color: var(--accent); cursor:pointer; display:flex; align-items:center; gap:6px; white-space:nowrap;
+  }
+  .gallery-btn:hover{ text-decoration:underline; }
+
+  /* ---------- LIGHTBOX ---------- */
+  .lightbox{
+    position:fixed; inset:0; background: rgba(15,17,20,0.92); z-index:100;
+    display:none; align-items:center; justify-content:center; padding: 40px 24px;
+  }
+  .lightbox.open{ display:flex; }
+  .lightbox-inner{ position:relative; max-width: 1000px; width:100%; }
+  .lightbox img{ width:100%; max-height:80vh; object-fit:contain; border-radius:8px; background:#000; }
+  .lightbox-close, .lightbox-prev, .lightbox-next{
+    position:absolute; background: rgba(20,24,28,0.7); color:#EDEFEE; border:1px solid rgba(255,255,255,0.2);
+    border-radius:50%; width:40px; height:40px; cursor:pointer; font-family: var(--font-mono); font-size:16px;
+    display:flex; align-items:center; justify-content:center; transition: background .15s ease;
+  }
+  .lightbox-close:hover, .lightbox-prev:hover, .lightbox-next:hover{ background: rgba(20,24,28,0.95); }
+  .lightbox-close{ top:-52px; right:0; }
+  .lightbox-prev{ left:-52px; top:50%; transform: translateY(-50%); }
+  .lightbox-next{ right:-52px; top:50%; transform: translateY(-50%); }
+  .lightbox-caption{ text-align:center; color:#B7BFC7; font-family: var(--font-mono); font-size:12.5px; margin-top:12px; }
+  @media(max-width:760px){
+    .lightbox-prev{ left:6px; } .lightbox-next{ right:6px; } .lightbox-close{ top:6px; right:6px; }
+  }
+
   /* ---------- FORMAÇÃO ---------- */
   .timeline{ display:flex; flex-direction:column; }
   .tl-item{ display:grid; grid-template-columns: 120px 1fr; gap: 24px; padding: 22px 0; border-top:1px solid var(--line-soft); }
@@ -377,9 +407,19 @@
             <span class="tag">SQL</span>
             <span class="tag">Integração com APIs de pagamento</span>
           </div>
+
+          <!-- Prints do CRM Next: ficam escondidos e só abrem no lightbox
+               ao clicar em "Ver prints" (evita poluir o card com miniaturas). -->
+          <div class="proj-gallery-data" data-gallery="crm-next" hidden>
+            <img src="assets/img/crm-next/dashboard-1.png" alt="Dashboard do CRM Next: receita dos últimos 90 dias, pedidos por status e segmentação de clientes">
+            <img src="assets/img/crm-next/dashboard-2.png" alt="Dashboard do CRM Next: top cidades, produtos mais vendidos e clientes recorrentes">
+            <img src="assets/img/crm-next/pedidos.png" alt="Tela de pedidos do CRM Next com status, forma de pagamento e rastreio">
+            <img src="assets/img/crm-next/cliente-360.png" alt="Visão 360° do cliente no CRM Next: LTV, pontuação RFM e histórico de pedidos">
+          </div>
+          <!-- Para adicionar mais prints: copie um <img> acima com o novo src/alt. -->
         </div>
         <div class="proj-actions">
-          <span class="proj-link muted">Prints e vídeo em breve</span>
+          <button type="button" class="proj-link gallery-btn" data-gallery-trigger="crm-next">Ver prints (4) →</button>
           <a class="proj-link" href="https://github.com/washington-santos" target="_blank" rel="noopener">Perfil GitHub →</a>
         </div>
       </article>
@@ -388,7 +428,7 @@
         <div>
           <div class="proj-head">
             <h3 class="proj-title">Rastreamento de conversões — Meta CAPI + GA4</h3>
-            <span class="badge badge-amber">Prints em breve</span>
+            <span class="badge badge-teal">Prints disponíveis</span>
           </div>
           <p class="proj-desc">
             Implementação de rastreamento server-side para corrigir perdas de mensuração causadas
@@ -400,9 +440,15 @@
             <span class="tag">GA4</span>
             <span class="tag">Integração via nuvem</span>
           </div>
+
+          <!-- Prints da integração Meta CAPI + GA4 -->
+          <div class="proj-gallery-data" data-gallery="capi-ga4" hidden>
+            <img src="assets/img/capi-ga4/tags-manager.png" alt="Google Tag Manager: tags configuradas, incluindo Facebook Conversion API e Cookie Monster">
+            <img src="assets/img/capi-ga4/datalayer-variables.png" alt="Variáveis de camada de dados no GTM usadas na integração Meta CAPI e GA4">
+          </div>
         </div>
         <div class="proj-actions">
-          <span class="proj-link muted">Prints em breve</span>
+          <button type="button" class="proj-link gallery-btn" data-gallery-trigger="capi-ga4">Ver prints (2) →</button>
         </div>
       </article>
 
@@ -420,8 +466,14 @@
             <span class="tag">TypeScript</span>
             <span class="tag">PL/pgSQL</span>
           </div>
+
+          <!-- Prints do Fluente -->
+          <div class="proj-gallery-data" data-gallery="fluente" hidden>
+            <img src="assets/img/fluente/aula-1-comida-bebida.png" alt="Tela de aula do Fluente sobre o tema Comida e bebida, com frase sugerida e feedback da professora virtual">
+          </div>
         </div>
         <div class="proj-actions">
+          <button type="button" class="proj-link gallery-btn" data-gallery-trigger="fluente">Ver prints (1) →</button>
           <a class="proj-link" href="https://washington-santos.vercel.app/" target="_blank" rel="noopener">Ver projeto →</a>
           <a class="proj-link" href="https://github.com/washington-santos" target="_blank" rel="noopener">Perfil GitHub →</a>
         </div>
@@ -474,6 +526,72 @@
     </div>
   </section>
 </main>
+
+<!-- Lightbox: reutilizado por todas as galerias de projeto -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" id="lb-close" aria-label="Fechar">✕</button>
+    <button class="lightbox-prev" id="lb-prev" aria-label="Imagem anterior">←</button>
+    <button class="lightbox-next" id="lb-next" aria-label="Próxima imagem">→</button>
+    <img id="lb-img" src="" alt="">
+    <p class="lightbox-caption" id="lb-caption"></p>
+  </div>
+</div>
+
+<script>
+  // Controla o lightbox de cada projeto. Cada card tem um botão
+  // [data-gallery-trigger="chave"] e um container escondido
+  // .proj-gallery-data[data-gallery="chave"] com as <img> daquele projeto.
+  // Para um novo projeto: repita esse par (botão + container) com uma nova chave.
+  (function(){
+    var lightbox = document.getElementById('lightbox');
+    var lbImg = document.getElementById('lb-img');
+    var lbCaption = document.getElementById('lb-caption');
+    var currentGallery = [];
+    var currentIndex = 0;
+
+    function openLightbox(images, index){
+      currentGallery = images;
+      currentIndex = index;
+      updateLightbox();
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox(){
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function updateLightbox(){
+      var img = currentGallery[currentIndex];
+      lbImg.src = img.src;
+      lbImg.alt = img.alt;
+      lbCaption.textContent = img.alt;
+    }
+    function step(delta){
+      currentIndex = (currentIndex + delta + currentGallery.length) % currentGallery.length;
+      updateLightbox();
+    }
+
+    document.querySelectorAll('[data-gallery-trigger]').forEach(function(btn){
+      var key = btn.getAttribute('data-gallery-trigger');
+      var container = document.querySelector('.proj-gallery-data[data-gallery="' + key + '"]');
+      if(!container) return;
+      var images = Array.prototype.slice.call(container.querySelectorAll('img'));
+      btn.addEventListener('click', function(){ openLightbox(images, 0); });
+    });
+
+    document.getElementById('lb-close').addEventListener('click', closeLightbox);
+    document.getElementById('lb-prev').addEventListener('click', function(){ step(-1); });
+    document.getElementById('lb-next').addEventListener('click', function(){ step(1); });
+    lightbox.addEventListener('click', function(e){ if(e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', function(e){
+      if(!lightbox.classList.contains('open')) return;
+      if(e.key === 'Escape') closeLightbox();
+      if(e.key === 'ArrowLeft') step(-1);
+      if(e.key === 'ArrowRight') step(1);
+    });
+  })();
+</script>
 
 </body>
 </html>

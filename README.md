@@ -56,6 +56,33 @@ tradução/config separados.
    `<span class="badge badge-amber">Repositório privado</span>` (ou
    `badge-teal` para variar a cor).
 
+### Adicionar prints a um projeto (galeria/lightbox)
+
+Cada card pode ter um botão **"Ver prints (N) →"** que abre um lightbox com
+as imagens daquele projeto. Isso é feito por um par botão + container:
+
+```html
+<div class="proj-gallery-data" data-gallery="crm-next" hidden>
+  <img src="assets/img/crm-next/dashboard-1.png" alt="Descrição da imagem">
+</div>
+```
+```html
+<button type="button" class="proj-link gallery-btn" data-gallery-trigger="crm-next">
+  Ver prints (1) →
+</button>
+```
+
+O `data-gallery` do container e o `data-gallery-trigger` do botão precisam
+ser **iguais** — é assim que o JS (no final do `<body>`) liga um ao outro.
+
+Para adicionar mais prints a um projeto existente: coloque a imagem em
+`assets/img/<projeto>/`, adicione um `<img src="..." alt="...">` dentro do
+`.proj-gallery-data` daquele projeto, e atualize o número no texto do botão.
+
+**Cuidado com dados sensíveis:** antes de adicionar qualquer print (CRM,
+dashboards etc.), confira se não expõe nome de cliente, e-mail, endereço ou
+nome do negócio — o repositório é público.
+
 ### Trocar o link do projeto Fluente
 
 Quando a etapa de segurança de dados do Fluente for concluída, troque o link
